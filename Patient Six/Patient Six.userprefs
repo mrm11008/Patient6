@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/playerRayCasting.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RobotMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/characterController.cs" Line="21" Column="38" />
-      <File FileName="Assets/Scripts/camMouseLook.cs" Line="27" Column="3" />
+      <File FileName="Assets/Scripts/RobotMovement.cs" Line="144" Column="23" />
+      <File FileName="Assets/Scripts/characterController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/camMouseLook.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/playerRayCasting.cs" Line="19" Column="72" />
     </Files>
   </MonoDevelop.Ide.Workbench>

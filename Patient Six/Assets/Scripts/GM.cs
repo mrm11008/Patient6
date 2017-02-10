@@ -1,12 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GM : MonoBehaviour {
 	public static GM instance = null;
 
+	//Meter Values
+	public Text movementMeter;
+	public Text soundMeter;
+	public Text visionMeter;
+	public Text lightMeter;
+
+//	public GameObject MovementMeter;
+	public MovementMeter mMeter;
+	public float mValue;
+	public bool mSwitch = true;
+
 	//Movement Variables
 	public GameObject movementMed;
-	public float movementMeter = 100;
+	public float movementMeterValue = 100;
 	public float decrementMovement = 1;
 	public float incrementMovement = 25;
 	public bool invertMovement = false;
@@ -29,7 +41,17 @@ public class GM : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (mSwitch == true) {
+			//MOVEMET TICK WILL ONLY START ONCE ACTIVE
+			Debug.Log("IM TRUE");
+			mMeter.gameObject.SetActive (true);
+		}
+
+
+//		mValue = mMeter.movementReturnValue ();
+//		Debug.Log (mValue);
+//
+//		movementMeter.text = "Movement: " + mValue;
 	}
 
 
@@ -38,6 +60,8 @@ public class GM : MonoBehaviour {
 	//---------------------------------HIDE CODE---------------------------------------
 	public void playerHidden() {
 		hidden = true;
+		mSwitch = true;
+
 	}
 	public void playerNotHidden() {
 		hidden = false;
@@ -57,10 +81,10 @@ public class GM : MonoBehaviour {
 
 	//MEDICINE FUNCTIONALITY
 	public void onTakeMoveMed() {
-		movementMeter += incrementMovement;
+		movementMeterValue += incrementMovement;
 	}
 	public void decreaseMovement() {
-		movementMeter -= decrementMovement;
+		movementMeterValue -= decrementMovement;
 	}
 
 }
