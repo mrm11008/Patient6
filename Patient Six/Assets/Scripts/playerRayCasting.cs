@@ -3,9 +3,12 @@ using System.Collections;
 
 public class playerRayCasting : MonoBehaviour {
 
+
 	public float distanceToSee;
 	RaycastHit whatIHit;
 	private bool touching = false;
+
+	private bool isShowing = false;
 
 	// Use this for initialization
 	void Start () {
@@ -41,9 +44,21 @@ public class playerRayCasting : MonoBehaviour {
 					if (whatIHit.collider.gameObject.GetComponent<Medicine> ().whatMedAmI == Medicine.MedicineType.movement) {
 						GM.instance.hideMoveMed ();
 						GM.instance.playerHidden ();
+//						GM.instance.displayClipBoard ();
 						Destroy (whatIHit.collider.gameObject);
 					}
+					//add code to hide clipboard after viewing
+
+
 				}
+
+				if (whatIHit.collider.tag == "Clipboard") { 
+					if (whatIHit.collider.gameObject.GetComponent<InteractionObjects> ().whatObjAmI == InteractionObjects.InteractType.clipboard) {
+						GM.instance.displayClipBoard ();
+						//						Destroy (whatIHit.collider.gameObject);
+					}
+				}
+
 			}
 
 		} else {

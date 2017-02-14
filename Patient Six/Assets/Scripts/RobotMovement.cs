@@ -14,7 +14,12 @@ public class RobotMovement : MonoBehaviour {
 	public bool readyToMove = true;
 	public bool readyToRotate = true;
 	public bool investigate = false;
-	public float distanceToSee = 5.0f;
+	public float distanceToSee = 10.0f;
+	public float distanceToAttack = 7.0f;
+
+	RaycastHit whatISee;
+	RaycastHit whatIHit;
+
 
 	public Transform target;
 	public Transform myTransform;
@@ -25,6 +30,8 @@ public class RobotMovement : MonoBehaviour {
 	public Vector3 distance;
 	public float minAngle = -45f;
 	public float maxAngle = 45f;
+
+
 //	Quaternion rotI = new Quaternion(0f, 30f, 0f);
 	// Use this for initialization
 	void Start () {
@@ -33,17 +40,36 @@ public class RobotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.DrawRay (this.transform.position, this.transform.forward * distanceToSee, Color.red);
+		Debug.DrawRay (this.transform.position, this.transform.forward * distanceToSee, Color.blue);
+		Debug.DrawRay (this.transform.position, this.transform.forward * distanceToAttack, Color.red);
+
+		//If the player is withing sight
+		if (Physics.Raycast (this.transform.position, this.transform.forward, out whatISee, distanceToSee)) {
+			Debug.Log (whatISee.collider.tag);
+			if (whatISee.collider.tag == "Player") {
+				inSight = true;
+				Debug.Log ("I SEE THE PLAYER");
+			} 
+		}
+
+		if (Physics.Raycast (this.transform.position, this.transform.forward, out whatIHit, distanceToAttack)) {
+			if (whatIHit.collider.tag == "Player") {
+				Debug.Log ("DART!!");
+				GM.instance.dartPlayer ();
+			}
+		}
+
 		if (inSight == true) {
 			transform.LookAt (target);
 			transform.Translate (Vector3.forward * 1 * Time.deltaTime);
+			//If the player is in attack range
+
 		}
 
 		if (inSight == false && wait == true) {
 			
 		}
 		if (inSight == false) {
-			
 			float dist = Vector3.Distance (path [currentPoint].position, transform.position);
 
 			//ROTATE BEFORE MOVE....WORKS-------
@@ -66,11 +92,10 @@ public class RobotMovement : MonoBehaviour {
 				wait = true;
 				investigate = true;
 
-				Debug.Log (path [currentPoint]);
 				currentPoint++;
 				//THIS WORKS FOR WAITING 8 SECONDS AT EACH POSITION
-				Invoke ("waitCycle", 6.0f);
-				Invoke ("investigateCycle", 3.0f);
+				Invoke ("waitCycle", 8.0f);
+				Invoke ("investigateCycle", 5.0f);
 //				Invoke ("rotateCycleTrue", 7.0f);
 //				Invoke ("rotateCycleFalse", 9.0f);
 
@@ -87,28 +112,35 @@ public class RobotMovement : MonoBehaviour {
 
 		}
 
-		if (wait == true) {
+		if (inSight == false) {
+			if (wait == true) {
 
-			if (investigate == true) {
-				Debug.Log ("INVESTIGATING");
-				if (path [currentPoint].name == "Destination2" || path[currentPoint].name == "Destination5") {
-					transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
-				} else {
-//					transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
+				if (investigate == true) {
+					Debug.Log (path [currentPoint]);
 
-				}
-//
-//				transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
+					if (path [currentPoint - 1].name == "Destination2" || path [currentPoint - 1].name == "Destination5") {
+						//POSSIBLY DO A SLOW 360 TURN
+						//WHEN AT HALLFWAY POSITIONS
+					} else {
+						Debug.Log ("INVESTIGATING");
+						transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
 
-
-//				transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
-//				investigate = false;
-//				Invoke ("investigateCycle", 2.0f);
+					}
+					//
+					//				transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
 
 
-			} 
+					//				transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
+					//				investigate = false;
+					//				Invoke ("investigateCycle", 2.0f);
 
+
+				} 
+
+			}
 		}
+
+
 
 		hiddenChecker = GM.instance.hiddenCheck ();
 		if (hiddenChecker == true) {
@@ -173,5 +205,9 @@ public class RobotMovement : MonoBehaviour {
 	}
 	void rotateCycleFalse() {
 		readyToRotate = false;
+	}
+
+	public void toggleInSight() {
+		inSight = false;
 	}
 }
