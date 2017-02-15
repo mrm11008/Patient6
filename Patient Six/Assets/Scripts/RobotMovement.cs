@@ -14,11 +14,15 @@ public class RobotMovement : MonoBehaviour {
 	public bool readyToMove = true;
 	public bool readyToRotate = true;
 	public bool investigate = false;
-	public float distanceToSee = 10.0f;
-	public float distanceToAttack = 7.0f;
+	public float distanceToSee = 15.0f;
+	public float distanceToAttack = 3.0f;
 
 	RaycastHit whatISee;
 	RaycastHit whatIHit;
+
+	private float _time;
+	public float _angle;
+	public float _period;
 
 
 	public Transform target;
@@ -31,11 +35,13 @@ public class RobotMovement : MonoBehaviour {
 	public float minAngle = -45f;
 	public float maxAngle = 45f;
 
-
+	public RobotSounds robotsound;
+	private bool playSoundOne = true;
+	private bool playSoundTwo = true;
 //	Quaternion rotI = new Quaternion(0f, 30f, 0f);
 	// Use this for initialization
 	void Start () {
-	
+		robotsound = gameObject.GetComponent<RobotSounds> ();
 	}
 	
 	// Update is called once per frame
@@ -48,12 +54,22 @@ public class RobotMovement : MonoBehaviour {
 			Debug.Log (whatISee.collider.tag);
 			if (whatISee.collider.tag == "Player") {
 				inSight = true;
+
+				if (playSoundOne == true) {
+					robotsound.playFoundSound ();
+					playSoundOne = false;
+				}
+
 				Debug.Log ("I SEE THE PLAYER");
 			} 
 		}
 
 		if (Physics.Raycast (this.transform.position, this.transform.forward, out whatIHit, distanceToAttack)) {
 			if (whatIHit.collider.tag == "Player") {
+				if (playSoundTwo == true) {
+					robotsound.playDartSound ();
+					playSoundTwo = false;
+				}
 				Debug.Log ("DART!!");
 				GM.instance.dartPlayer ();
 			}
@@ -94,16 +110,16 @@ public class RobotMovement : MonoBehaviour {
 
 				currentPoint++;
 				//THIS WORKS FOR WAITING 8 SECONDS AT EACH POSITION
-				Invoke ("waitCycle", 8.0f);
-				Invoke ("investigateCycle", 5.0f);
+				Invoke ("waitCycle", 12.0f);
+				Invoke ("investigateCycle", 7.0f);
 //				Invoke ("rotateCycleTrue", 7.0f);
 //				Invoke ("rotateCycleFalse", 9.0f);
 
 
-				Invoke ("moveCycle", 8.0f);
+//				Invoke ("moveCycle", 10.0f);
 				Debug.Log ("REACHED POSITION");
 				readyToMove = false;
-//				Invoke ("moveCycle", 10.0f);
+//				
 			}
 
 			if (currentPoint >= path.Length) {
@@ -123,7 +139,14 @@ public class RobotMovement : MonoBehaviour {
 						//WHEN AT HALLFWAY POSITIONS
 					} else {
 						Debug.Log ("INVESTIGATING");
-						transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
+//						transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + 1 * Mathf.Sin (Time.time * 1), 0f);
+						_time = _time + Time.deltaTime;
+						float phase = Mathf.Sin (_time / 0.5f);
+						transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y + phase * 1.78f, 0f);
+//						transform.rotation = Quaternion.Lerp(
+//						transform.rotation *= Quaternion.Euler(0,90,0);
+//						var adjustRotation = transform.rotation.y + 
+//						transform.rot
 
 					}
 					//
@@ -176,12 +199,13 @@ public class RobotMovement : MonoBehaviour {
 		Debug.Log ("Rotate to next point");
 		distance = path [currentPoint].position - transform.position;
 		newRot = Quaternion.LookRotation (distance, transform.up);
-		newRot.x = 0;
-		newRot.z = 0;
+//		newRot.x = 0;
+//		newRot.z = 0;
 		transform.rotation = Quaternion.Lerp (transform.rotation, newRot, speedRotate * Time.deltaTime);
 //		if (transform.rotation == newRot) {
+
 		if (transform.rotation == newRot) {
-			
+			Debug.Log("I am looking at the next point!!!");
 //			readyToMove = true;
 //			Invoke ("moveCycle", 1.0f);
 		}

@@ -10,9 +10,12 @@ public class playerRayCasting : MonoBehaviour {
 
 	private bool isShowing = false;
 
+	public CharacterSounds audso;
+
 	// Use this for initialization
 	void Start () {
-	
+		audso = GetComponentInParent<CharacterSounds> ();
+//		audso = this.gameObject.GetComponent<CharacterSounds> ();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +45,7 @@ public class playerRayCasting : MonoBehaviour {
 
 					Debug.Log ("WTF");
 					if (whatIHit.collider.gameObject.GetComponent<Medicine> ().whatMedAmI == Medicine.MedicineType.movement) {
+						audso.playTakeItem ();
 						GM.instance.hideMoveMed ();
 						GM.instance.playerHidden ();
 //						GM.instance.displayClipBoard ();
@@ -53,9 +57,10 @@ public class playerRayCasting : MonoBehaviour {
 				}
 
 				if (whatIHit.collider.tag == "Clipboard") { 
+
 					if (whatIHit.collider.gameObject.GetComponent<InteractionObjects> ().whatObjAmI == InteractionObjects.InteractType.clipboard) {
 						GM.instance.displayClipBoard ();
-						//						Destroy (whatIHit.collider.gameObject);
+						audso.playPickUpClip();
 					}
 				}
 
