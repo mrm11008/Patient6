@@ -21,11 +21,12 @@ public class GM : MonoBehaviour {
 	public Text soundMeter;
 	public Text visionMeter;
 	public Text lightMeter;
-
 //	public GameObject MovementMeter;
 	public MovementMeter mMeter;
+	public SoundMeter sMeter;
 	public float mValue;
-	public bool mSwitch = true;
+	public bool mSwitch = false;
+	public bool sSwitch = false;
 
 	//Movement Variables
 	public GameObject movementMed;
@@ -35,11 +36,19 @@ public class GM : MonoBehaviour {
 	public bool invertMovement = false;
 	//develop a timer that will tic every x seconds, decrease the movement meter
 
+	//Sound Variables
+	public AudioSource soundLevelOne;
+	public AudioSource soundLevelTwo;
+	public AudioSource soundLevelThree;
+
+
 	//UI ELEMENTS: CLIPBOARD
 	public Image clipBoard;
 	private bool isShowing;
 
 	public bool hidden = false;
+
+
 
 	void Awake() {
 //		clonePlayer = Instantiate (playerPrefab, playerPosition, Quaternion.identity) as GameObject;
@@ -63,8 +72,14 @@ public class GM : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		startGame.SetActive (false);
 		//Instantiate player and Robot
-
 //		cloneRobot = Instantiate (robotPrefab, robotPosition, Quaternion.identity) as GameObject;
+
+		//Set up sound
+		var audiosources = this.gameObject.GetComponents<AudioSource> ();
+		soundLevelOne = audiosources [0];
+		soundLevelTwo = audiosources [1];
+		soundLevelThree = audiosources [2];
+
 	}
 	void Reset() {
 		Time.timeScale = 1f;
@@ -109,18 +124,28 @@ public class GM : MonoBehaviour {
 //			Invoke ("dartReset", 1.0f);
 			playerDarted = false;
 		}
-
+		//MOVEMENT CHECKS
 		if (mSwitch == true) {
 			//MOVEMET TICK WILL ONLY START ONCE ACTIVE
 			Debug.Log("IM TRUE");
 			mMeter.gameObject.SetActive (true);
 		}
+		//SOUND CHECKS
+		if (sSwitch == true) {
+			sMeter.gameObject.SetActive (true);
+		}
 
-
-//		mValue = mMeter.movementReturnValue ();
-//		Debug.Log (mValue);
-//
-//		movementMeter.text = "Movement: " + mValue;
+		if (sMeter.getSoundValue () < 100 && sMeter.getSoundValue () > 75) {
+//			playLevelOneSound ();
+		}
+		if (sMeter.getSoundValue () < 75 && sMeter.getSoundValue () > 50) {
+//			playLevelTwoSound ();	
+//			stopLevelOneSound();
+		}
+		if (sMeter.getSoundValue () < 50 && sMeter.getSoundValue () > 25) {
+//			playLevelThreeSound ();
+//			stopLevelTwoSound();
+		}
 	}
 
 
@@ -130,6 +155,7 @@ public class GM : MonoBehaviour {
 	public void playerHidden() {
 		hidden = true;
 		mSwitch = true;
+		sSwitch = true;
 
 	}
 	public void playerNotHidden() {
@@ -161,6 +187,38 @@ public class GM : MonoBehaviour {
 	}
 	public void decreaseMovement() {
 		movementMeterValue -= decrementMovement;
+	}
+
+	//---------------------------------SOUND CODE---------------------------------------
+
+	public void playLevelOneSound() {
+		soundLevelOne.Play ();
+		stopLevelTwoSound ();
+		stopLevelThreeSound ();
+	}
+
+	public void playLevelTwoSound() {
+		soundLevelTwo.Play ();
+		stopLevelOneSound ();
+		stopLevelThreeSound ();
+	}
+
+	public void playLevelThreeSound() {
+		soundLevelThree.Play ();
+		stopLevelOneSound ();
+		stopLevelTwoSound ();
+	}
+
+	public void stopLevelOneSound() {
+		soundLevelOne.Stop ();
+	}
+
+	public void stopLevelTwoSound() {
+		soundLevelTwo.Stop ();
+	}
+
+	public void stopLevelThreeSound() {
+		soundLevelThree.Stop ();
 	}
 
 	//---------------------------------DART CODE---------------------------------------
