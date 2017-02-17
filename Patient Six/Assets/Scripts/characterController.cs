@@ -12,11 +12,6 @@ public class characterController : MonoBehaviour {
 //	public float jumpSpeed = 20;
 //	public float maxSlope = 60;
 
-
-
-
-
-
 	public Vector3 positionOne;
 	public Vector3 positionTwo;
 
@@ -25,6 +20,8 @@ public class characterController : MonoBehaviour {
 
 	public float speed = 10.0f;
 	public float length = 0;
+
+	private Vector3 movementVec;
 	// Use this for initialization
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
@@ -36,22 +33,40 @@ public class characterController : MonoBehaviour {
 	void Update () {
 		float translation = Input.GetAxis ("Vertical") * speed;
 		float straffe = Input.GetAxis ("Horizontal") * speed;
+//		float translation = Input.GetAxis ("Vertical");
+//		float straffe = Input.GetAxis ("Horizontal");
+
+//		movementVec = new Vector3 (straffe, 0, translation);
+//		movementVec = movementVec.normalized;
 
 		translation *= Time.deltaTime;
 		straffe += Time.deltaTime;
 
 		positionOne = transform.position;
+//		if (Input.GetAxis ("Vertical") > 0) {
+//			transform.Translate (straffe / 100, 0, translation);
+//		}
+//		if (Input.GetAxis ("Horizontal") > 0) {
+//			transform.Translate (straffe / 100, 0, translation);
+//		}
+//		if (Input.GetAxis ("Vertical") < 0) {
+//			transform.Translate (straffe / 100, 0, translation);
+//		}
+//		if (Input.GetAxis ("Horizontal") < 0) {
+//			transform.Translate (straffe / 100, 0, translation);
+//
+//		}
 		if (Input.GetAxis ("Vertical") > 0) {
-			transform.Translate (straffe / 100, 0, translation);
+			transform.Translate (0, 0, translation);
 		}
 		if (Input.GetAxis ("Horizontal") > 0) {
-			transform.Translate (straffe / 100, 0, translation);
+			transform.Translate (straffe / 50, 0, 0);
 		}
 		if (Input.GetAxis ("Vertical") < 0) {
-			transform.Translate (straffe / 100, 0, translation);
+			transform.Translate (0, 0, translation);
 		}
 		if (Input.GetAxis ("Horizontal") < 0) {
-			transform.Translate (straffe / 100, 0, translation);
+			transform.Translate (straffe / 50, 0, 0);
 
 		}
 

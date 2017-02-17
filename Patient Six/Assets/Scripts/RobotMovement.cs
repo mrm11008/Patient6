@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class RobotMovement : MonoBehaviour {
+
+	private enum STATE { WAIT, CHASE, PATROL, INVESTIGATE};
+	STATE currentState;
+
 	public Transform[] path;
 	public float speed = 1.0f;
 	public float speedRotate = 1.0f;
@@ -46,6 +50,26 @@ public class RobotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//New State Code
+		switch (currentState) {
+		case STATE.WAIT:
+			UpdateWait ();
+			break;
+		case STATE.CHASE:
+			UpdateChase ();
+			break;
+		case STATE.PATROL:
+			UpdatePatrol ();
+			break;
+		case STATE.INVESTIGATE:
+			UpdateInvestigate ();
+			break;
+		}
+
+
+
+
+		//-----------------------------------OLD CODE, REPLACE WITH STATES-------------------------------------
 		Debug.DrawRay (this.transform.position, this.transform.forward * distanceToSee, Color.blue);
 		Debug.DrawRay (this.transform.position, this.transform.forward * distanceToAttack, Color.red);
 
@@ -175,6 +199,7 @@ public class RobotMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.name == "Player") {
+			GM.instance.dartPlayer ();
 			inSight = true;
 		}
 	}
@@ -234,4 +259,39 @@ public class RobotMovement : MonoBehaviour {
 	public void toggleInSight() {
 		inSight = false;
 	}
+
+
+
+
+	//---------------------------------Add New State functions------------------------------------------
+
+	private void EnterWaitState() {
+
+	}
+	private void UpdateWait() {
+
+	}
+
+	private void EnterInvestigateState() {
+
+	}
+	private void UpdateInvestigate(){
+	}
+
+	private void EnterChaseState() {
+
+	}
+
+	private void UpdateChase() {
+
+	}
+
+	private void EnterPatrolState() {
+
+	}
+
+	private void UpdatePatrol() {
+
+	}
+
 }

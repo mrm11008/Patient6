@@ -64,6 +64,13 @@ public class playerRayCasting : MonoBehaviour {
 					}
 				}
 
+				if (whatIHit.collider.tag == "Cassette") { 
+
+					if (whatIHit.collider.gameObject.GetComponent<InteractionObjects> ().whatObjAmI == InteractionObjects.InteractType.cassette) {
+						GM.instance.accessCassetteOne ();
+					}
+				}
+
 			}
 
 		} else {

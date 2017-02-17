@@ -14,6 +14,7 @@ public class CharacterSounds : MonoBehaviour {
 		var audiosources = this.gameObject.GetComponents<AudioSource> ();
 		audiosource = audiosources [0];
 		audiosource2 = audiosources [1];
+
 	}
 	public void playPickUpClip() {
 		audiosource.PlayOneShot (pickUp);
@@ -32,4 +33,7 @@ public class CharacterSounds : MonoBehaviour {
 	public bool sourceTwoIsPlaying() {
 		return audiosource2.isPlaying;
 	}
+
+
+
 }

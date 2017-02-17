@@ -42,8 +42,12 @@ public class GM : MonoBehaviour {
 	public AudioSource soundLevelThree;
 
 
+	// CASSATTE PLAYERS
+	public CassettePlayer cpOne;
+
 	//UI ELEMENTS: CLIPBOARD
 	public Image clipBoard;
+	public Image clipBoardTwo;
 	private bool isShowing;
 
 	public bool hidden = false;
@@ -78,7 +82,8 @@ public class GM : MonoBehaviour {
 		var audiosources = this.gameObject.GetComponents<AudioSource> ();
 		soundLevelOne = audiosources [0];
 		soundLevelTwo = audiosources [1];
-		soundLevelThree = audiosources [2];
+//		soundLevelThree = audiosources [2];
+		playLevelOneSound ();
 
 	}
 	void Reset() {
@@ -114,6 +119,7 @@ public class GM : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("s")) {
 			Setup ();
+
 		}
 		if (Input.GetKeyDown ("r")) {
 //			Reset ();
@@ -192,12 +198,14 @@ public class GM : MonoBehaviour {
 	//---------------------------------SOUND CODE---------------------------------------
 
 	public void playLevelOneSound() {
+		Debug.Log ("PLAY AMBIENT SOUND");
 		soundLevelOne.Play ();
 		stopLevelTwoSound ();
 		stopLevelThreeSound ();
 	}
 
 	public void playLevelTwoSound() {
+		
 		soundLevelTwo.Play ();
 		stopLevelOneSound ();
 		stopLevelThreeSound ();
@@ -227,5 +235,12 @@ public class GM : MonoBehaviour {
 		//SLOW DOWN MOUSE MOVEMENT ASWELL
 		playerDarted = true;
 
+	}
+
+
+	//---------------------------------CASSETTE CODE---------------------------------------
+	public void accessCassetteOne() {
+
+		cpOne.playCassette ();
 	}
 }
