@@ -1,82 +1,78 @@
 fileFormatVersion: 2
-guid: 6a79f156bc7534de086e8dd591f40c17
-timeCreated: 1487352541
+guid: a9b10265d3f95412ca66fb9ec618eb34
+timeCreated: 1487518170
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: group
-    100004: group1
-    100006: group2
-    100008: left
-    100010: pCube10
-    100012: pCube3
-    100014: pCube3 1
-    100016: pCube4
-    100018: pCube4 1
-    100020: pCube5
-    100022: pCube5 1
-    100024: pCube6
-    100026: pCube7
-    100028: pCube8
-    100030: pCylinder1
-    100032: pCylinder1 1
-    100034: pCylinder2
-    100036: pCylinder3
-    100038: pillow:pCube2
-    100040: pillow:polySurface2
+    100002: group1
+    100004: group2
+    100006: left
+    100008: pCube3
+    100010: pCube3 1
+    100012: pCube4
+    100014: pCube4 1
+    100016: pCube5
+    100018: pCube5 1
+    100020: pCube6
+    100022: pCube7
+    100024: pCube8
+    100026: pCylinder1
+    100028: pCylinder1 1
+    100030: pCylinder2
+    100032: pCylinder3
+    100034: pillow1
+    100036: pillow:pCube2
+    100038: pillow:polySurface2
     400000: //RootNode
-    400002: group
-    400004: group1
-    400006: group2
-    400008: left
-    400010: pCube10
-    400012: pCube3
-    400014: pCube3 1
-    400016: pCube4
-    400018: pCube4 1
-    400020: pCube5
-    400022: pCube5 1
-    400024: pCube6
-    400026: pCube7
-    400028: pCube8
-    400030: pCylinder1
-    400032: pCylinder1 1
-    400034: pCylinder2
-    400036: pCylinder3
-    400038: pillow:pCube2
-    400040: pillow:polySurface2
-    2300000: pCube10
-    2300002: pCube3
-    2300004: pCube3 1
-    2300006: pCube4
-    2300008: pCube4 1
-    2300010: pCube5
-    2300012: pCube5 1
-    2300014: pCube6
-    2300016: pCube7
-    2300018: pCube8
-    2300020: pCylinder1
-    2300022: pCylinder1 1
-    2300024: pCylinder2
-    2300026: pCylinder3
-    2300028: pillow:polySurface2
-    3300000: pCube10
-    3300002: pCube3
-    3300004: pCube3 1
-    3300006: pCube4
-    3300008: pCube4 1
-    3300010: pCube5
-    3300012: pCube5 1
-    3300014: pCube6
-    3300016: pCube7
-    3300018: pCube8
-    3300020: pCylinder1
-    3300022: pCylinder1 1
-    3300024: pCylinder2
-    3300026: pCylinder3
-    3300028: pillow:polySurface2
+    400002: group1
+    400004: group2
+    400006: left
+    400008: pCube3
+    400010: pCube3 1
+    400012: pCube4
+    400014: pCube4 1
+    400016: pCube5
+    400018: pCube5 1
+    400020: pCube6
+    400022: pCube7
+    400024: pCube8
+    400026: pCylinder1
+    400028: pCylinder1 1
+    400030: pCylinder2
+    400032: pCylinder3
+    400034: pillow1
+    400036: pillow:pCube2
+    400038: pillow:polySurface2
+    2300000: pCube3
+    2300002: pCube3 1
+    2300004: pCube4
+    2300006: pCube4 1
+    2300008: pCube5
+    2300010: pCube5 1
+    2300012: pCube6
+    2300014: pCube7
+    2300016: pCube8
+    2300018: pCylinder1
+    2300020: pCylinder1 1
+    2300022: pCylinder2
+    2300024: pCylinder3
+    2300026: pillow:polySurface2
+    3300000: pCube3
+    3300002: pCube3 1
+    3300004: pCube4
+    3300006: pCube4 1
+    3300008: pCube5
+    3300010: pCube5 1
+    3300012: pCube6
+    3300014: pCube7
+    3300016: pCube8
+    3300018: pCylinder1
+    3300020: pCylinder1 1
+    3300022: pCylinder2
+    3300024: pCylinder3
+    3300026: pillow:polySurface2
     4300000: pCube3
     4300002: pCylinder1
     4300004: pCube4
@@ -90,8 +86,7 @@ ModelImporter:
     4300020: pCube6
     4300022: pCube7
     4300024: pCube8
-    4300026: pCube10
-    4300028: pillow:polySurface2
+    4300026: pillow:polySurface2
   materials:
     importMaterials: 1
     materialName: 0
@@ -116,7 +111,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
