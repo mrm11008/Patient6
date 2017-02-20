@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GM : MonoBehaviour {
+
 	public static GM instance = null;
-
 	public GameObject startGame;
-
 	public GameObject playerPrefab;
 	public GameObject robotPrefab;
+
 	//Player and Robot objects
 	private GameObject clonePlayer;
 	private GameObject cloneRobot;
@@ -21,7 +21,8 @@ public class GM : MonoBehaviour {
 	public Text soundMeter;
 	public Text visionMeter;
 	public Text lightMeter;
-//	public GameObject MovementMeter;
+
+    //public GameObject MovementMeter;
 	public MovementMeter mMeter;
 	public SoundMeter sMeter;
 	public float mValue;
@@ -43,10 +44,15 @@ public class GM : MonoBehaviour {
 
 
 	// CASSATTE PLAYERS
-	public CassettePlayer cpOne;
+	public CassettePlayer cp6;
+    public CassettePlayer cp5;
+    public CassettePlayer cp4;
+    public CassettePlayer cp3;
+    public CassettePlayer cp2;
+    public CassettePlayer cp1;
 
-	//UI ELEMENTS: CLIPBOARD
-	public Image clipBoard;
+    //UI ELEMENTS: CLIPBOARD
+    public Image clipBoard;
 	public Image clipBoardTwo;
 	private bool isShowing;
 
@@ -86,6 +92,7 @@ public class GM : MonoBehaviour {
 		playLevelOneSound ();
 
 	}
+
 	void Reset() {
 		Time.timeScale = 1f;
 		Application.LoadLevel (Application.loadedLevel);
@@ -98,12 +105,14 @@ public class GM : MonoBehaviour {
 		Invoke ("replacePlayer", 1.0f);
 		replaceRobot ();
 	}
+
 	void replacePlayer() {
 		Time.timeScale = 1f;
 		float fadeTime = GameObject.Find ("GM").GetComponent<Fading> ().BeginFade (-1);
 		playerPrefab.transform.position = playerPosition;
 
 	}
+
 	void replaceRobot() {
 		//change inSight to false
 		//reposition him 
@@ -241,6 +250,7 @@ public class GM : MonoBehaviour {
 	//---------------------------------CASSETTE CODE---------------------------------------
 	public void accessCassetteOne() {
 
-		cpOne.playCassette ();
+		cp6.playCassette ();
 	}
+
 }

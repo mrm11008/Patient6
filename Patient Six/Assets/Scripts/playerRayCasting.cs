@@ -15,8 +15,8 @@ public class playerRayCasting : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		audso = GetComponentInParent<CharacterSounds> ();
-//		audso = this.gameObject.GetComponent<CharacterSounds> ();
-	}
+        //		audso = this.gameObject.GetComponent<CharacterSounds> ();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -35,10 +35,10 @@ public class playerRayCasting : MonoBehaviour {
 				GM.instance.hideMoveMed ();
 
 
-			} 
+			}
 
-		
-			if (Input.GetKeyDown (KeyCode.E)) {
+
+            if (Input.GetKeyDown (KeyCode.E)) {
 				Debug.Log ("I picked up a " + whatIHit.collider.gameObject.name);
 				if (whatIHit.collider.tag == "MoveMed") {
 					
